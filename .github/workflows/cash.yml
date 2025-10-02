@@ -1,0 +1,24 @@
+name: Cache Dependencies
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: prime-cache-b9311d1
+        id: cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: cache-b9311d1
+
+      - name: Echo cache result
+        run: echo "Cache hit: ${{ steps.cache.outputs.cache-hit }}"
